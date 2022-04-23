@@ -21,4 +21,5 @@ struct victron_data_t{
   data_field_t yield_yesterday;
   data_field_t max_pwr_yesterday;
   data_field_t charger_state;
+  boolean enable_charger = true;
 };

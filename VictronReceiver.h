@@ -1,5 +1,8 @@
+#include <HardwareSerial.h>
 #define RXD2 16
 #define TXD2 17
+
+HardwareSerial MySerial(1);
 
 void set_value(data_field_t *field_ptr, float new_val, String field_name){
   data_field_t *field = (data_field_t*)field_ptr;
@@ -11,12 +14,18 @@ void set_value(data_field_t *field_ptr, float new_val, String field_name){
 
 void victron_task(void * parameter){
   victron_data_t *ve_data = (victron_data_t*)parameter;
-  Serial1.begin(19200, SERIAL_8N1, RXD2, TXD2);
-  Serial1.setRxBufferSize(400);
+  
+  MySerial.begin(19200, SERIAL_8N1, RXD2);
+  MySerial.setRxBufferSize(400);
+  pinMode(TXD2, OUTPUT);
+  digitalWrite(TXD2, LOW);
+  
+  
   String tempStr = "";
+  
   for (;;) {    
-    while (Serial1.available() > 0) {
-        char byteFromSerial = Serial1.read();
+    while (MySerial.available() > 0) {
+        char byteFromSerial = MySerial.read();
         if(byteFromSerial != '\n'){
           tempStr += byteFromSerial;
         }else{
@@ -65,6 +74,9 @@ void victron_task(void * parameter){
           tempStr = "";
         }
     }
+    digitalWrite(TXD2, ve_data->enable_charger);
+    TelnetStream.println("VE_RECEIVER: enable charger: " + (String)ve_data->enable_charger);
+    TelnetStream.println("VE_RECEIVER: enable PIN: " + (String)digitalRead(TXD2));
     vTaskDelay(pdMS_TO_TICKS(950));
   }
 }

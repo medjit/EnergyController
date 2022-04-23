@@ -30,6 +30,11 @@ char *uptime(){
   return (char *)uptime(millis()); // call original uptime function with unsigned long millis() value
 }
 
+BLYNK_WRITE(V14){ //remote control solar charger
+  if(param.asInt() == 1) ve_data.enable_charger = true;
+  else                   ve_data.enable_charger = false;
+}
+
 void ve_data_update(){
   if(ve_data.panel_voltage.flags.blynk){
     Blynk.virtualWrite(V4, ve_data.panel_voltage.value);
@@ -93,9 +98,15 @@ void ve_data_update(){
 
 void blynk_task(void * parameter){
   Blynk.begin(auth, MY_SSID, MY_PASS);
+  
   for (;;) {
     Blynk.virtualWrite(V0, uptime());
+    
     ve_data_update();
+
+    Blynk.virtualWrite(V14, ve_data.enable_charger);
+        
+    Blynk.run();
     vTaskDelay(pdMS_TO_TICKS(2000));
   }
 }
