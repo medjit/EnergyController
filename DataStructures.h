@@ -1,10 +1,10 @@
 struct usage_flags_t{
-  boolean temporary = false;
+  boolean blynk = false;
 };
 
 
 struct data_field_t{
-  float value = 0;
+  float value;
   usage_flags_t flags;
   unsigned long  update_timestamp = 0;
 };

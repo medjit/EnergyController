@@ -5,7 +5,7 @@ void set_value(data_field_t *field_ptr, float new_val, String field_name){
   data_field_t *field = (data_field_t*)field_ptr;
   field->value = new_val;
   field->update_timestamp = millis();
-  field->flags.temporary = true;
+  field->flags.blynk = true;
   TelnetStream.println("VE_RECEIVER: " + field_name + ": " + (String)new_val);
 }
 
