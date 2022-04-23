@@ -38,9 +38,9 @@ void ota_task(void * parameter){
   WiFi.begin(ssid, password);
 
   // Wait for connection
-  while (WiFi.status() != WL_CONNECTED) {
-    vTaskDelay(pdMS_TO_TICKS(500));
-  }
+  //while (WiFi.status() != WL_CONNECTED) {
+  //  vTaskDelay(pdMS_TO_TICKS(500));
+  //}
 
   // Port defaults to 3232
   // ArduinoOTA.setPort(3232); // Use 8266 port if you are working in Sloeber IDE, it is fixed there and not adjustable
