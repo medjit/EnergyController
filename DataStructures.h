@@ -1,3 +1,5 @@
+unsigned long lastPressedButtonTime = 0;
+
 struct usage_flags_t{
   boolean blynk = false;
 };
@@ -22,4 +24,15 @@ struct victron_data_t{
   data_field_t max_pwr_yesterday;
   data_field_t charger_state;
   boolean enable_charger = true;
-};
+}ve_data;
+
+struct board_io_t{
+  boolean input1 = false;
+  boolean input2 = false;
+  boolean input3 = false;
+  boolean output1 = false;
+  boolean output2 = false;
+  boolean output3 = false;
+  boolean output4 = true;
+  boolean output5 = false;
+}board_io;

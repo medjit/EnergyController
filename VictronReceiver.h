@@ -18,8 +18,6 @@ void victron_task(void * parameter){
   MySerial.begin(19200, SERIAL_8N1, RXD2);
   MySerial.setRxBufferSize(400);
   pinMode(TXD2, OUTPUT);
-  digitalWrite(TXD2, LOW);
-  
   
   String tempStr = "";
   
@@ -75,8 +73,6 @@ void victron_task(void * parameter){
         }
     }
     digitalWrite(TXD2, ve_data->enable_charger);
-    TelnetStream.println("VE_RECEIVER: enable charger: " + (String)ve_data->enable_charger);
-    TelnetStream.println("VE_RECEIVER: enable PIN: " + (String)digitalRead(TXD2));
     vTaskDelay(pdMS_TO_TICKS(950));
   }
 }

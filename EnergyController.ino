@@ -1,17 +1,33 @@
+#define VOLTAGE_PIN   36
+#define BUZZER_PIN    5
+#define RELAY1_PIN    26
+#define RELAY2_PIN    27
+#define RELAY3_PIN    14
+#define RELAY4_PIN    12
+#define RELAY5_PIN    13
+#define LAMP_OUTPUT   5
+#define STATUS_LED_PIN 15
+#define INPUT1_PIN    32
+#define INPUT2_PIN    33
+#define INPUT3_PIN    25
+
+
 
 #include "Credentials.h"
 #include "DataStructures.h"
-victron_data_t ve_data;
-
+#include "Utils.h"
+#include "IOControl.h"
 #include "OTA.h"
 #include "Blynk.h"
 #include "VictronReceiver.h"
 
 
 void setup(){
+  xTaskCreate(ioc_task,     "IOC_HANDLE",    10000, NULL,     1, NULL);
   xTaskCreate(victron_task, "VE_HANDLE",     10000, &ve_data, 1, NULL);
   xTaskCreate(ota_task,     "OTA_HANDLE",    10000, NULL,     1, NULL);
   xTaskCreate(blynk_task,   "BLYNK_HANDLE",  10000, NULL,     1, NULL);
+  doBeep(2);
 }
 
 void loop(){

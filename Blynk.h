@@ -30,7 +30,33 @@ char *uptime(){
   return (char *)uptime(millis()); // call original uptime function with unsigned long millis() value
 }
 
+BLYNK_WRITE(V41){
+  doBeep(0);
+  if(param.asInt() == 1) board_io.output1 = true;
+  else                   board_io.output1 = false;
+}
+BLYNK_WRITE(V42){
+  doBeep(0);
+  if(param.asInt() == 1) board_io.output2 = true;
+  else                   board_io.output2 = false;
+}
+BLYNK_WRITE(V43){
+  doBeep(0);
+  if(param.asInt() == 1) board_io.output3 = true;
+  else                   board_io.output3 = false;
+}
+BLYNK_WRITE(V44){
+  doBeep(0);
+  if(param.asInt() == 1) board_io.output4 = true;
+  else                   board_io.output4 = false;
+}
+BLYNK_WRITE(V45){ //Lamp Output
+  doBeep(0);
+  if(param.asInt() == 1) lastPressedButtonTime = millis();
+  else                   lastPressedButtonTime = 0;
+}
 BLYNK_WRITE(V14){ //remote control solar charger
+  doBeep(0);
   if(param.asInt() == 1) ve_data.enable_charger = true;
   else                   ve_data.enable_charger = false;
 }
@@ -100,8 +126,16 @@ void blynk_task(void * parameter){
   Blynk.begin(auth, MY_SSID, MY_PASS);
   
   for (;;) {
+    Blynk.run();
     Blynk.virtualWrite(V0, uptime());
-    
+    Blynk.virtualWrite(V41, board_io.output1);
+    Blynk.virtualWrite(V42, board_io.output2);
+    Blynk.virtualWrite(V43, board_io.output3);
+    Blynk.virtualWrite(V44, board_io.output4);
+    Blynk.virtualWrite(V45, board_io.output5);
+    Blynk.virtualWrite(V51, board_io.input1);
+    Blynk.virtualWrite(V52, board_io.input2);
+    Blynk.virtualWrite(V53, board_io.input3);
     ve_data_update();
 
     Blynk.virtualWrite(V14, ve_data.enable_charger);
