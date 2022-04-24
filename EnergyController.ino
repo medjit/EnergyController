@@ -15,6 +15,7 @@
 
 #include "Credentials.h"
 #include "DataStructures.h"
+#include "Terminal.h"
 #include "Utils.h"
 #include "IOControl.h"
 #include "OTA.h"

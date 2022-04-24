@@ -61,6 +61,10 @@ BLYNK_WRITE(V14){ //remote control solar charger
   else                   ve_data.enable_charger = false;
 }
 
+BLYNK_WRITE(V100){ //Blynk Terminal interface
+  Blynk.virtualWrite(V100, terminal_run(param.asStr()));
+}
+
 void ve_data_update(){
   if(ve_data.panel_voltage.flags.blynk){
     Blynk.virtualWrite(V4, ve_data.panel_voltage.value);
