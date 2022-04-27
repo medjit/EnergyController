@@ -20,6 +20,7 @@
 #include "IOControl.h"
 #include "OTA.h"
 #include "Blynk.h"
+#include "MQTT.h"
 #include "VictronReceiver.h"
 #include "DalyReceiver.h"
 
@@ -35,6 +36,8 @@ void setup(){
   xTaskCreate(ota_task,     "OTA_HANDLE",    10000, NULL,       1, NULL);
   delay(10);
   xTaskCreate(blynk_task,   "BLYNK_HANDLE",  10000, NULL,       1, NULL);
+  delay(10);
+  xTaskCreate(mqtt_task,    "MQTT_HANDLE",   10000, NULL,       1, NULL);
   //doBeep(2);
 }
 
