@@ -1,8 +1,6 @@
-#include <HardwareSerial.h>
 #define RXD2 16
 #define TXD2 17
-
-HardwareSerial MySerial(2);
+#define MySerial Serial2
 
 void set_ve_value(data_field_t *field_ptr, float new_val, String field_name){
   data_field_t *field = (data_field_t*)field_ptr;
@@ -15,8 +13,8 @@ void set_ve_value(data_field_t *field_ptr, float new_val, String field_name){
 void victron_task(void * parameter){
   victron_data_t *ve_data = (victron_data_t*)parameter;
   
-  //MySerial.begin(19200, SERIAL_8N1);
-  //MySerial.setRxBufferSize(400);
+  MySerial.begin(19200, SERIAL_8N1);
+  MySerial.setRxBufferSize(400);
   pinMode(TXD2, OUTPUT);
   
   String tempStr = "";

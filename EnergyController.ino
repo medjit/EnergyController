@@ -25,10 +25,15 @@
 
 
 void setup(){
+  delay(10);
   xTaskCreate(ioc_task,     "IOC_HANDLE",    10000, NULL,       1, NULL);
-  xTaskCreate(victron_task, "VE_HANDLE",     10000, &ve_data,   1, NULL);
+  delay(10);
   xTaskCreate(daly_task,    "DALY_HANDLE",   10000, &daly_data, 1, NULL);
+  delay(10);
+  xTaskCreate(victron_task, "VE_HANDLE",     10000, &ve_data,   1, NULL);
+  delay(10);
   xTaskCreate(ota_task,     "OTA_HANDLE",    10000, NULL,       1, NULL);
+  delay(10);
   xTaskCreate(blynk_task,   "BLYNK_HANDLE",  10000, NULL,       1, NULL);
   //doBeep(2);
 }

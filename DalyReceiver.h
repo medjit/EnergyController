@@ -1,12 +1,9 @@
-#include <HardwareSerial.h>
 #include "daly-bms-uart.h"
 
 //Do not forget to change Serial1 pins in 
 //AppData>Local>arduino>packages>esp32>2.0.2>cores>esp32>harwareSerail.cpp
 
-HardwareSerial DalyPort(1);
-
-Daly_BMS_UART bms(DalyPort);
+Daly_BMS_UART bms(Serial1);
 
 void set_daly_value(data_field_t *field_ptr, float new_val, String field_name){
   data_field_t *field = (data_field_t*)field_ptr;
