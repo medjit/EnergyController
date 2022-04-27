@@ -21,14 +21,16 @@
 #include "OTA.h"
 #include "Blynk.h"
 #include "VictronReceiver.h"
+#include "DalyReceiver.h"
 
 
 void setup(){
   xTaskCreate(ioc_task,     "IOC_HANDLE",    10000, NULL,     1, NULL);
   xTaskCreate(victron_task, "VE_HANDLE",     10000, &ve_data, 1, NULL);
+  xTaskCreate(daly_task,    "DALY_HANDLE",   10000, NULL,     1, NULL);
   xTaskCreate(ota_task,     "OTA_HANDLE",    10000, NULL,     1, NULL);
   xTaskCreate(blynk_task,   "BLYNK_HANDLE",  10000, NULL,     1, NULL);
-  doBeep(2);
+  //doBeep(2);
 }
 
 void loop(){
