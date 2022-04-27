@@ -2,10 +2,12 @@ unsigned long lastPressedButtonTime = 0;
 
 struct usage_flags_t{
   boolean blynk = false;
+  boolean mqtt = false;
 };
 
 
 struct data_field_t{
+  String field_topic = "/unknown";
   float value;
   usage_flags_t flags;
   unsigned long  update_timestamp = 0;
@@ -13,6 +15,7 @@ struct data_field_t{
 
 
 struct victron_data_t{
+  String vendor_topic = "kusak/solar/victron";
   data_field_t panel_voltage;
   data_field_t battery_voltage;
   data_field_t battery_current;
@@ -27,6 +30,7 @@ struct victron_data_t{
 }ve_data;
 
 struct daly_bms_data_t{
+  String vendor_topic = "kusak/solar/daly";
   data_field_t packVoltage;
   data_field_t packCurrent;
   data_field_t packSOC;
@@ -52,6 +56,7 @@ struct daly_bms_data_t{
 }daly_data;
 
 struct board_io_t{
+  String vendor_topic = "kusak/solar/board";
   boolean input1 = false;
   boolean input2 = false;
   boolean input3 = false;
