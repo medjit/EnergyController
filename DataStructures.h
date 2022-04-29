@@ -29,32 +29,6 @@ struct victron_data_t{
   boolean enable_charger = true;
 }ve_data;
 
-struct daly_bms_data_t{
-  String vendor_topic = "kusak/solar/daly";
-  data_field_t packVoltage;
-  data_field_t packCurrent;
-  data_field_t packSOC;
-  data_field_t tempAverage;
-  data_field_t maxCellVNum;
-  data_field_t maxCellV;
-  data_field_t minCellVNum;
-  data_field_t minCellV;
-  data_field_t bmsCycles;
-  data_field_t bmsHeartBeat;
-  data_field_t disChargeFetState;
-  data_field_t chargeFetState;
-  data_field_t resCapacityAh;
-  data_field_t cell1V;
-  data_field_t cell2V;
-  data_field_t cell3V;
-  data_field_t cell4V;
-  data_field_t cell5V;
-  data_field_t cell6V;
-  data_field_t cell7V;
-  data_field_t cell8V;
-  data_field_t levelOneCellVoltageTooHigh;
-}daly_data;
-
 struct board_io_t{
   String vendor_topic = "kusak/solar/board";
   boolean input1 = false;

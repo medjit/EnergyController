@@ -115,85 +115,6 @@ void ve_data_update(){
   }
 }
 
-void daly_data_update(){
-  if(daly_data.packVoltage.flags.blynk){
-    Blynk.virtualWrite(V23, daly_data.packVoltage.value);
-    daly_data.packVoltage.flags.blynk = false;
-  }
-
-  if(daly_data.packCurrent.flags.blynk){
-    Blynk.virtualWrite(V22, daly_data.packCurrent.value);
-    daly_data.packCurrent.flags.blynk = false;
-  }
-
-  if(daly_data.packSOC.flags.blynk){
-    Blynk.virtualWrite(V21, daly_data.packSOC.value);
-    daly_data.packSOC.flags.blynk = false;
-  }
-
-  if(daly_data.tempAverage.flags.blynk){
-    Blynk.virtualWrite(V24, daly_data.tempAverage.value);
-    daly_data.tempAverage.flags.blynk = false;
-  }
-
-  if(daly_data.maxCellV.flags.blynk){
-    float diff = daly_data.maxCellV.value - daly_data.minCellV.value;
-    Blynk.virtualWrite(V25, diff);
-    daly_data.maxCellV.flags.blynk = false;
-  }
-
-  if(daly_data.bmsCycles.flags.blynk){
-    Blynk.virtualWrite(V26, daly_data.bmsCycles.value);
-    daly_data.bmsCycles.flags.blynk = false;
-  }
-
-  if(daly_data.resCapacityAh.flags.blynk){
-    Blynk.virtualWrite(V27, daly_data.resCapacityAh.value);
-    daly_data.resCapacityAh.flags.blynk = false;
-  }
-
-  if(daly_data.cell1V.flags.blynk){
-    Blynk.virtualWrite(V28, daly_data.cell1V.value);
-    daly_data.cell1V.flags.blynk = false;
-  }
-
-  if(daly_data.cell2V.flags.blynk){
-    Blynk.virtualWrite(V29, daly_data.cell2V.value);
-    daly_data.cell2V.flags.blynk = false;
-  }
-
-  if(daly_data.cell3V.flags.blynk){
-    Blynk.virtualWrite(V30, daly_data.cell3V.value);
-    daly_data.cell3V.flags.blynk = false;
-  }
-
-  if(daly_data.cell4V.flags.blynk){
-    Blynk.virtualWrite(V31, daly_data.cell4V.value);
-    daly_data.cell4V.flags.blynk = false;
-  }
-
-  if(daly_data.cell5V.flags.blynk){
-    Blynk.virtualWrite(V32, daly_data.cell5V.value);
-    daly_data.cell5V.flags.blynk = false;
-  }
-
-  if(daly_data.cell6V.flags.blynk){
-    Blynk.virtualWrite(V33, daly_data.cell6V.value);
-    daly_data.cell6V.flags.blynk = false;
-  }
-
-  if(daly_data.cell7V.flags.blynk){
-    Blynk.virtualWrite(V34, daly_data.cell7V.value);
-    daly_data.cell7V.flags.blynk = false;
-  }
-
-  if(daly_data.cell8V.flags.blynk){
-    Blynk.virtualWrite(V35, daly_data.cell8V.value);
-    daly_data.cell8V.flags.blynk = false;
-  }
-}
-
-
 void blynk_task(void * parameter){
   Blynk.begin(auth, MY_SSID, MY_PASS);
   
@@ -209,7 +130,6 @@ void blynk_task(void * parameter){
     Blynk.virtualWrite(V52, board_io.input2);
     Blynk.virtualWrite(V53, board_io.input3);
     ve_data_update();
-    daly_data_update();
 
     Blynk.virtualWrite(V14, ve_data.enable_charger);
     Blynk.virtualWrite(V67, get_boiler_power(ve_data.panel_voltage.value));

@@ -42,30 +42,6 @@ void send_ve_data(){
   if(ve_data.charger_state.flags.mqtt)      publish_value(ve_data.vendor_topic, &ve_data.charger_state);
 }
 
-void send_daly_data(){
-  if(daly_data.packVoltage.flags.mqtt)        publish_value(daly_data.vendor_topic, &daly_data.packVoltage);
-  if(daly_data.packCurrent.flags.mqtt)        publish_value(daly_data.vendor_topic, &daly_data.packCurrent);
-  if(daly_data.packSOC.flags.mqtt)            publish_value(daly_data.vendor_topic, &daly_data.packSOC);
-  if(daly_data.tempAverage.flags.mqtt)        publish_value(daly_data.vendor_topic, &daly_data.tempAverage);
-  if(daly_data.maxCellVNum.flags.mqtt)        publish_value(daly_data.vendor_topic, &daly_data.maxCellVNum);
-  if(daly_data.maxCellV.flags.mqtt)           publish_value(daly_data.vendor_topic, &daly_data.maxCellV);
-  if(daly_data.minCellVNum.flags.mqtt)        publish_value(daly_data.vendor_topic, &daly_data.minCellVNum);
-  if(daly_data.minCellV.flags.mqtt)           publish_value(daly_data.vendor_topic, &daly_data.minCellV);
-  if(daly_data.bmsCycles.flags.mqtt)          publish_value(daly_data.vendor_topic, &daly_data.bmsCycles);
-  if(daly_data.bmsHeartBeat.flags.mqtt)       publish_value(daly_data.vendor_topic, &daly_data.bmsHeartBeat);
-  if(daly_data.disChargeFetState.flags.mqtt)  publish_value(daly_data.vendor_topic, &daly_data.disChargeFetState);
-  if(daly_data.chargeFetState.flags.mqtt)     publish_value(daly_data.vendor_topic, &daly_data.chargeFetState);
-  if(daly_data.resCapacityAh.flags.mqtt)      publish_value(daly_data.vendor_topic, &daly_data.resCapacityAh);
-  if(daly_data.cell1V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell1V);
-  if(daly_data.cell2V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell2V);
-  if(daly_data.cell3V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell3V);
-  if(daly_data.cell4V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell4V);
-  if(daly_data.cell5V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell5V);
-  if(daly_data.cell6V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell6V);
-  if(daly_data.cell7V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell7V);
-  if(daly_data.cell8V.flags.mqtt)             publish_value(daly_data.vendor_topic, &daly_data.cell8V);
-}
-
 void send_board_data(){
   //TODO:
 }
@@ -76,7 +52,6 @@ void send_data_to_broker(){
   if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {
       TelnetStream.println("Mqtt broker connected");
       send_ve_data();
-      send_daly_data();
       send_board_data();
   } else {
       TelnetStream.print("failed with state ");
@@ -98,30 +73,6 @@ void mqtt_task(void * parameter){
   ve_data.max_pwr_yesterday.field_topic = "/maxyesterday";
   ve_data.charger_state.field_topic =     "/chargerstate";
 
-  daly_data.packVoltage.field_topic =     "/packvoltage";
-  daly_data.packCurrent.field_topic =     "/packvurrent";
-  daly_data.packSOC.field_topic =         "/packsoc";
-  daly_data.tempAverage.field_topic =     "/temp";
-  daly_data.maxCellVNum.field_topic =     "/maccellnum";
-  daly_data.maxCellV.field_topic =        "/maxcellv";
-  daly_data.minCellVNum.field_topic =     "/mincellnum";
-  daly_data.minCellV.field_topic =        "/mincellv";
-  daly_data.bmsCycles.field_topic =       "/cycles";
-  daly_data.bmsHeartBeat.field_topic =    "/heartbeat";
-  daly_data.disChargeFetState.field_topic = "/dischargerstate";
-  daly_data.chargeFetState.field_topic =  "/chargerstate";
-  daly_data.resCapacityAh.field_topic =   "/restcapacityah";
-  daly_data.cell1V.field_topic =          "/cell1v";
-  daly_data.cell2V.field_topic =          "/cell2v";
-  daly_data.cell3V.field_topic =          "/cell3v";
-  daly_data.cell4V.field_topic =          "/cell4v";
-  daly_data.cell5V.field_topic =          "/cell5v";
-  daly_data.cell6V.field_topic =          "/cell6v";
-  daly_data.cell7V.field_topic =          "/cell7v";
-  daly_data.cell8V.field_topic =          "/cell8v";
-  daly_data.levelOneCellVoltageTooHigh.field_topic = "/locvtth";
-
-  
   //connecting to a mqtt broker
   while (WiFi.status() != WL_CONNECTED) {
     vTaskDelay(pdMS_TO_TICKS(500));
