@@ -122,6 +122,7 @@ void blynk_task(void * parameter){
     Blynk.run();
     Blynk.virtualWrite(V0, uptime());
     Blynk.virtualWrite(V41, board_io.output1);
+    Blynk.virtualWrite(V68, !board_io.output1);
     Blynk.virtualWrite(V42, board_io.output2);
     Blynk.virtualWrite(V43, board_io.output3);
     Blynk.virtualWrite(V44, board_io.output4);
