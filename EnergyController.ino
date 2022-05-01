@@ -15,6 +15,7 @@
 
 #include "Credentials.h"
 #include "DataStructures.h"
+#include "EepromUtils.h"
 #include "Terminal.h"
 #include "Utils.h"
 #include "IOControl.h"
@@ -25,6 +26,7 @@
 
 
 void setup(){
+  eeprom_init();
   delay(10);
   xTaskCreate(ioc_task,     "IOC_HANDLE",    10000, NULL,       1, NULL);
   delay(10);
