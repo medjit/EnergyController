@@ -10,6 +10,9 @@
 #define INPUT1_PIN    32
 #define INPUT2_PIN    33
 #define INPUT3_PIN    25
+#define UP_BTN_PIN    23
+#define DOWN_BTN_PIN  34
+#define OK_BTN_PIN    35
 
 #include <DS3231.h>
 #include <Wire.h>

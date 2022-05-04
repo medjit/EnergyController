@@ -33,11 +33,17 @@ void ioc_task(void * parameter){
   pinMode(INPUT1_PIN, INPUT_PULLUP);
   pinMode(INPUT2_PIN, INPUT_PULLUP);
   pinMode(INPUT3_PIN, INPUT_PULLUP);
+  pinMode(UP_BTN_PIN, INPUT);
+  pinMode(DOWN_BTN_PIN, INPUT);
+  pinMode(OK_BTN_PIN, INPUT);
 
   for (;;) {
     lampAgentLoop();
     update_io();
-    
+    if(digitalRead(UP_BTN_PIN) == LOW || digitalRead(DOWN_BTN_PIN) == LOW || digitalRead(OK_BTN_PIN) == LOW){
+      lastPressedButtonTime = millis();
+      doBeep(0);
+    }
     vTaskDelay(pdMS_TO_TICKS(4));
   }
 }
