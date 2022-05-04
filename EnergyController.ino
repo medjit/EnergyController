@@ -88,5 +88,5 @@ void loop(){
   board_data.ambient_humidity.flags.blynk = true;
   board_data.ambient_humidity.flags.mqtt = true;
   
-  vTaskDelay(pdMS_TO_TICKS(20000));
+  vTaskDelay(pdMS_TO_TICKS(5000));
 }

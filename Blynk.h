@@ -115,23 +115,62 @@ void ve_data_update(){
   }
 }
 
+void board_data_update(){
+  Blynk.virtualWrite(V41, board_data.output1);
+  Blynk.virtualWrite(V68, !board_data.output1);
+  Blynk.virtualWrite(V42, board_data.output2);
+  Blynk.virtualWrite(V43, board_data.output3);
+  Blynk.virtualWrite(V44, board_data.output4);
+  Blynk.virtualWrite(V45, board_data.output5);
+  Blynk.virtualWrite(V51, board_data.input1);
+  Blynk.virtualWrite(V52, board_data.input2);
+  Blynk.virtualWrite(V53, board_data.input3);
+    
+  if(board_data.voltage.flags.blynk){
+    Blynk.virtualWrite(V65, board_data.voltage.value);
+    board_data.voltage.flags.blynk = false;
+  }
+  
+  if(board_data.wifi_rssi.flags.blynk){
+    Blynk.virtualWrite(V66, board_data.wifi_rssi.value);
+    board_data.wifi_rssi.flags.blynk = false;
+  }
+  
+  if(board_data.rtc_temp.flags.blynk){
+    Blynk.virtualWrite(V60, board_data.rtc_temp.value);
+    board_data.rtc_temp.flags.blynk = false;
+  }
+  
+  if(board_data.battery_temp.flags.blynk){
+    Blynk.virtualWrite(V63, board_data.battery_temp.value);
+    board_data.battery_temp.flags.blynk = false;
+  }
+  
+  if(board_data.battery_humidity.flags.blynk){
+    Blynk.virtualWrite(V64, board_data.battery_humidity.value);
+    board_data.battery_humidity.flags.blynk = false;
+  }
+  
+  if(board_data.ambient_temp.flags.blynk){
+    Blynk.virtualWrite(V61, board_data.ambient_temp.value);
+    board_data.ambient_temp.flags.blynk = false;
+  }
+  
+  if(board_data.ambient_humidity.flags.blynk){
+    Blynk.virtualWrite(V62, board_data.ambient_humidity.value);
+    board_data.ambient_humidity.flags.blynk = false;
+  }
+}
+
 void blynk_task(void * parameter){
   Blynk.begin(auth, MY_SSID, MY_PASS);
   
   for (;;) {
     Blynk.run();
     Blynk.virtualWrite(V0, uptime());
-    Blynk.virtualWrite(V41, board_data.output1);
-    Blynk.virtualWrite(V68, !board_data.output1);
-    Blynk.virtualWrite(V42, board_data.output2);
-    Blynk.virtualWrite(V43, board_data.output3);
-    Blynk.virtualWrite(V44, board_data.output4);
-    Blynk.virtualWrite(V45, board_data.output5);
-    Blynk.virtualWrite(V51, board_data.input1);
-    Blynk.virtualWrite(V52, board_data.input2);
-    Blynk.virtualWrite(V53, board_data.input3);
     ve_data_update();
-
+    board_data_update();
+    
     Blynk.virtualWrite(V14, ve_data.enable_charger);
     Blynk.virtualWrite(V67, get_boiler_power(ve_data.panel_voltage.value));
         
