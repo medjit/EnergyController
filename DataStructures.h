@@ -39,6 +39,8 @@ struct board_io_t{
   boolean output3 = false;
   boolean output4 = true;
   boolean output5 = false;
+  boolean wifi_status = false;
+  byte status_led_val = 0;
   data_field_t voltage;
   data_field_t wifi_rssi;
   data_field_t rtc_temp;
