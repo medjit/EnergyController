@@ -17,11 +17,11 @@ void update_to_eeprom(byte address, byte value){
 }
 
 void set_default_state(){
-  update_to_eeprom(OUT1_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output1);
-  update_to_eeprom(OUT2_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output2);
-  update_to_eeprom(OUT3_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output3);
-  update_to_eeprom(OUT4_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output4);
-  update_to_eeprom(OUT5_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output5);
+  update_to_eeprom(OUT1_DEFAULT_STATE_EEPROM_ADDRESS, board_data.output1);
+  update_to_eeprom(OUT2_DEFAULT_STATE_EEPROM_ADDRESS, board_data.output2);
+  update_to_eeprom(OUT3_DEFAULT_STATE_EEPROM_ADDRESS, board_data.output3);
+  update_to_eeprom(OUT4_DEFAULT_STATE_EEPROM_ADDRESS, board_data.output4);
+  update_to_eeprom(OUT5_DEFAULT_STATE_EEPROM_ADDRESS, board_data.output5);
   update_to_eeprom(VE_CHARGER_DEFAULT_STATE_EEPROM_ADDRESS, ve_data.enable_charger);
   EEPROM.commit();
 }
@@ -29,11 +29,11 @@ void set_default_state(){
 void eeprom_init(){
   EEPROM.begin(EEPROM_SIZE);
 
-  board_io.output1 = EEPROM.read(OUT1_DEFAULT_STATE_EEPROM_ADDRESS);
-  board_io.output2 = EEPROM.read(OUT2_DEFAULT_STATE_EEPROM_ADDRESS);
-  board_io.output3 = EEPROM.read(OUT3_DEFAULT_STATE_EEPROM_ADDRESS);
-  board_io.output4 = EEPROM.read(OUT4_DEFAULT_STATE_EEPROM_ADDRESS);
-  board_io.output5 = EEPROM.read(OUT5_DEFAULT_STATE_EEPROM_ADDRESS);
+  board_data.output1 = EEPROM.read(OUT1_DEFAULT_STATE_EEPROM_ADDRESS);
+  board_data.output2 = EEPROM.read(OUT2_DEFAULT_STATE_EEPROM_ADDRESS);
+  board_data.output3 = EEPROM.read(OUT3_DEFAULT_STATE_EEPROM_ADDRESS);
+  board_data.output4 = EEPROM.read(OUT4_DEFAULT_STATE_EEPROM_ADDRESS);
+  board_data.output5 = EEPROM.read(OUT5_DEFAULT_STATE_EEPROM_ADDRESS);
 
   ve_data.enable_charger = EEPROM.read(VE_CHARGER_DEFAULT_STATE_EEPROM_ADDRESS);
 }

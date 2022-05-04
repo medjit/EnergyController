@@ -39,4 +39,11 @@ struct board_io_t{
   boolean output3 = false;
   boolean output4 = true;
   boolean output5 = false;
-}board_io;
+  data_field_t voltage;
+  data_field_t wifi_rssi;
+  data_field_t rtc_temp;
+  data_field_t battery_temp;
+  data_field_t battery_humidity;
+  data_field_t ambient_temp;
+  data_field_t ambient_humidity;
+}board_data;

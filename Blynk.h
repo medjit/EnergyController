@@ -15,30 +15,30 @@
 char auth[] = BLYNK_AUTH_TOKEN;
 
 unsigned int get_boiler_power(float voltage){
-  if(board_io.output4 == 0) return 0;
+  if(board_data.output4 == 0) return 0;
   float amps = voltage / 18.0;
   return (amps * voltage);
 }
 
 BLYNK_WRITE(V41){
   doBeep(0);
-  if(param.asInt() == 1) board_io.output1 = true;
-  else                   board_io.output1 = false;
+  if(param.asInt() == 1) board_data.output1 = true;
+  else                   board_data.output1 = false;
 }
 BLYNK_WRITE(V42){
   doBeep(0);
-  if(param.asInt() == 1) board_io.output2 = true;
-  else                   board_io.output2 = false;
+  if(param.asInt() == 1) board_data.output2 = true;
+  else                   board_data.output2 = false;
 }
 BLYNK_WRITE(V43){
   doBeep(0);
-  if(param.asInt() == 1) board_io.output3 = true;
-  else                   board_io.output3 = false;
+  if(param.asInt() == 1) board_data.output3 = true;
+  else                   board_data.output3 = false;
 }
 BLYNK_WRITE(V44){
   doBeep(0);
-  if(param.asInt() == 1) board_io.output4 = true;
-  else                   board_io.output4 = false;
+  if(param.asInt() == 1) board_data.output4 = true;
+  else                   board_data.output4 = false;
 }
 BLYNK_WRITE(V45){ //Lamp Output
   doBeep(0);
@@ -121,15 +121,15 @@ void blynk_task(void * parameter){
   for (;;) {
     Blynk.run();
     Blynk.virtualWrite(V0, uptime());
-    Blynk.virtualWrite(V41, board_io.output1);
-    Blynk.virtualWrite(V68, !board_io.output1);
-    Blynk.virtualWrite(V42, board_io.output2);
-    Blynk.virtualWrite(V43, board_io.output3);
-    Blynk.virtualWrite(V44, board_io.output4);
-    Blynk.virtualWrite(V45, board_io.output5);
-    Blynk.virtualWrite(V51, board_io.input1);
-    Blynk.virtualWrite(V52, board_io.input2);
-    Blynk.virtualWrite(V53, board_io.input3);
+    Blynk.virtualWrite(V41, board_data.output1);
+    Blynk.virtualWrite(V68, !board_data.output1);
+    Blynk.virtualWrite(V42, board_data.output2);
+    Blynk.virtualWrite(V43, board_data.output3);
+    Blynk.virtualWrite(V44, board_data.output4);
+    Blynk.virtualWrite(V45, board_data.output5);
+    Blynk.virtualWrite(V51, board_data.input1);
+    Blynk.virtualWrite(V52, board_data.input2);
+    Blynk.virtualWrite(V53, board_data.input3);
     ve_data_update();
 
     Blynk.virtualWrite(V14, ve_data.enable_charger);

@@ -1,13 +1,13 @@
 
 void update_io(){
-  digitalWrite(RELAY1_PIN, board_io.output1);
-  digitalWrite(RELAY2_PIN, board_io.output2);
-  digitalWrite(RELAY3_PIN, board_io.output3);
-  digitalWrite(RELAY4_PIN, board_io.output4);
-  digitalWrite(RELAY5_PIN, board_io.output5);
-  board_io.input1 = !digitalRead(INPUT1_PIN);
-  board_io.input2 = !digitalRead(INPUT2_PIN);
-  board_io.input3 = !digitalRead(INPUT3_PIN);
+  digitalWrite(RELAY1_PIN, board_data.output1);
+  digitalWrite(RELAY2_PIN, board_data.output2);
+  digitalWrite(RELAY3_PIN, board_data.output3);
+  digitalWrite(RELAY4_PIN, board_data.output4);
+  digitalWrite(RELAY5_PIN, board_data.output5);
+  board_data.input1 = !digitalRead(INPUT1_PIN);
+  board_data.input2 = !digitalRead(INPUT2_PIN);
+  board_data.input3 = !digitalRead(INPUT3_PIN);
 }
 
 
@@ -15,9 +15,9 @@ void update_io(){
 #define LAMP_ON_TIME  600000    //10 minutes
 void lampAgentLoop(){
   if((millis() - lastPressedButtonTime) <= LAMP_ON_TIME){
-    board_io.output5 = true;
+    board_data.output5 = true;
   }else{
-    board_io.output5 = false;
+    board_data.output5 = false;
   }
 }
 //---------------- Lamp Agent ----------------

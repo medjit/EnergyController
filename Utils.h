@@ -46,3 +46,23 @@ void doBeep(byte type){
       digitalWrite(BUZZER_PIN, LOW);
   }
 }
+
+float mapFloat(float value, float fromLow, float fromHigh, float toLow, float toHigh) {
+  return (value - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow; 
+}
+
+#define SAMPLES   1000
+#define HIGH_RES  9930.0
+#define LOW_RES   996.0
+float getBoardVoltage(){
+  float voltage = 0.0;
+  unsigned long rawData = 0;
+  for(unsigned int i = 0; i <= SAMPLES; i ++){
+    rawData += analogRead(VOLTAGE_PIN);
+  }
+  rawData = rawData / SAMPLES;
+  float rawVoltage = (rawData * 3.3) / 4096.0;
+  voltage = rawVoltage / (LOW_RES / (HIGH_RES + LOW_RES));
+    voltage = mapFloat(voltage, 10.55, 25.8, 11.95, 27.29);
+  return voltage;
+}
