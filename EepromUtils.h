@@ -10,6 +10,21 @@
 
 #define VE_CHARGER_DEFAULT_STATE_EEPROM_ADDRESS 6
 
+void update_to_eeprom(byte address, byte value){
+  if(value != EEPROM.read(address)){
+    EEPROM.write(address, value);
+  }
+}
+
+void set_default_state(){
+  update_to_eeprom(OUT1_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output1);
+  update_to_eeprom(OUT2_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output2);
+  update_to_eeprom(OUT3_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output3);
+  update_to_eeprom(OUT4_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output4);
+  update_to_eeprom(OUT5_DEFAULT_STATE_EEPROM_ADDRESS, board_io.output5);
+  update_to_eeprom(VE_CHARGER_DEFAULT_STATE_EEPROM_ADDRESS, ve_data.enable_charger);
+  EEPROM.commit();
+}
 
 void eeprom_init(){
   EEPROM.begin(EEPROM_SIZE);

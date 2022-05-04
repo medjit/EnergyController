@@ -4,6 +4,7 @@ String get_help(){
   help += "ping => Print I'm here :)\n";
   help += "help => Print all commands\n";
   help += "ESP.RESTART => restart esp after 5 seconds\n";
+  help += "setDefState => set current to default state\n";
   return help;
 }
 
@@ -14,13 +15,24 @@ void rst_esp(void * parameter){
 
 String terminal_run(String input_line){
   String result = "Unknown command!";
-  if(input_line == "ping"){
+  String command, param1, param2;
+  if(input_line.indexOf(" ") > 0){
+    command = input_line.substring(0, input_line.indexOf(" "));
+    String rest_of_line = input_line.substring(input_line.indexOf(" "), input_line.length() - 1);
+  }else{
+    command = input_line;
+  }
+  
+  if(command == "ping"){
     result = "I'm here :)";
-  }else if(input_line == "help"){
+  }else if(command == "help"){
     result = get_help();
-  }else if(input_line == "ESP.RESTART"){
+  }else if(command == "ESP.RESTART"){
     result = "Restarting the ESP in 5 sec.";
     xTaskCreate(rst_esp, "RST_HANDLE", 1000, NULL,1, NULL);
+  }else if(command == "setDefState"){
+    result = "Setting current state to default.";
+    set_default_state();
   }
   return result + "\n\n";
 }
