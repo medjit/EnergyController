@@ -66,3 +66,19 @@ float getBoardVoltage(){
     voltage = mapFloat(voltage, 10.55, 25.8, 11.95, 27.29);
   return voltage;
 }
+
+boolean switch_boiler(){
+  if(ve_data.enable_charger == false){
+    return true;
+  }else if(ve_data.power.value > 300){
+    return true;
+  }else if(board_data.voltage.value > 27.00){
+    return true;
+  }else if(ve_data.charger_state.value == 5){
+    return true;
+  }else if(ve_data.yield_today.value > 6.00){
+    return true;
+  }else{
+    return false;
+  }
+}

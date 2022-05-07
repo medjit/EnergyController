@@ -5,6 +5,9 @@ String get_help(){
   help += "help => Print all commands\n";
   help += "ESP.RESTART => restart esp after 5 seconds\n";
   help += "setDefState => set current to default state\n";
+  help += "autoBoilerOn => set auto boiler to on\n";
+  help += "autoBoilerOff => set auto boiler to off\n";
+  help += "getAutoBoiler => return auto boiler state\n";
   return help;
 }
 
@@ -33,6 +36,22 @@ String terminal_run(String input_line){
   }else if(command == "setDefState"){
     result = "Setting current state to default.";
     set_default_state();
+  }else if(command == "autoBoilerOn"){
+    result = "Setting ON auto boiler.";
+    board_data.auto_boiler = true;
+    update_to_eeprom(AUTO_BOILER_STATE_EEPROM_ADDRESS, board_data.auto_boiler);
+    EEPROM.commit();
+  }else if(command == "autoBoilerOff"){
+    result = "Setting FF auto boiler.";
+    board_data.auto_boiler = false;
+    update_to_eeprom(AUTO_BOILER_STATE_EEPROM_ADDRESS, board_data.auto_boiler);
+    EEPROM.commit();
+  }else if(command == "getAutoBoiler"){
+    if(board_data.auto_boiler){
+      result = "Auto boiler is on!";
+    }else{
+      result = "Auto boiler is off!";
+    }
   }
   return result + "\n\n";
 }

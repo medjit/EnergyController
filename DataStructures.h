@@ -40,6 +40,7 @@ struct board_io_t{
   boolean output4 = true;
   boolean output5 = false;
   boolean wifi_status = false;
+  boolean auto_boiler = false;
   byte status_led_val = 0;
   data_field_t voltage;
   data_field_t wifi_rssi;

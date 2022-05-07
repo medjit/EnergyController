@@ -7,8 +7,9 @@
 #define OUT3_DEFAULT_STATE_EEPROM_ADDRESS 3
 #define OUT4_DEFAULT_STATE_EEPROM_ADDRESS 4
 #define OUT5_DEFAULT_STATE_EEPROM_ADDRESS 5
-
 #define VE_CHARGER_DEFAULT_STATE_EEPROM_ADDRESS 6
+#define AUTO_BOILER_STATE_EEPROM_ADDRESS 7
+
 
 void update_to_eeprom(byte address, byte value){
   if(value != EEPROM.read(address)){

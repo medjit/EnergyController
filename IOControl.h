@@ -74,6 +74,7 @@ void ioc_task(void * parameter){
     lampAgentLoop();
     update_io();
     statusLedLoop();
+    if(board_data.auto_boiler) board_data.output4 = switch_boiler();
     if(digitalRead(UP_BTN_PIN) == LOW || digitalRead(DOWN_BTN_PIN) == LOW || digitalRead(OK_BTN_PIN) == LOW){
       lastPressedButtonTime = millis();
       doBeep(0);
