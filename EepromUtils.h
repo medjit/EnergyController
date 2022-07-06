@@ -35,6 +35,7 @@ void eeprom_init(){
   board_data.output3 = EEPROM.read(OUT3_DEFAULT_STATE_EEPROM_ADDRESS);
   board_data.output4 = EEPROM.read(OUT4_DEFAULT_STATE_EEPROM_ADDRESS);
   board_data.output5 = EEPROM.read(OUT5_DEFAULT_STATE_EEPROM_ADDRESS);
+  board_data.auto_boiler = EEPROM.read(AUTO_BOILER_STATE_EEPROM_ADDRESS);
 
   ve_data.enable_charger = EEPROM.read(VE_CHARGER_DEFAULT_STATE_EEPROM_ADDRESS);
 }

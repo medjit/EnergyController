@@ -68,17 +68,10 @@ float getBoardVoltage(){
 }
 
 boolean switch_boiler(){
-  if(ve_data.enable_charger == false){
-    return true;
-  }else if(ve_data.power.value > 300){
-    return true;
-  }else if(board_data.voltage.value > 27.00){
-    return true;
-  }else if(ve_data.charger_state.value == 5){
-    return true;
-  }else if(ve_data.yield_today.value > 6.00){
-    return true;
-  }else{
-    return false;
-  }
+  if(ve_data.panel_voltage.value < 35.00) return false;
+  if(ve_data.enable_charger == false)     return true;
+  if(ve_data.power.value > 800)           return true;
+  if(board_data.voltage.value > 27.00)    return true;
+  if(ve_data.charger_state.value == 5)    return true;
+  return false;
 }
